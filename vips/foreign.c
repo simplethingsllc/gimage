@@ -96,6 +96,11 @@ int save_buffer(const char *operationName, SaveParams *params,
   return 0;
 }
 
+VipsImage * load_image_source(VipsSourceCustom *source) {
+	// https://libvips.github.io/libvips/API/current/VipsImage.html#vips-image-new-from-source
+	return vips_image_new_from_source( (VipsSource*) source, "", NULL);
+}
+
 // https://libvips.github.io/libvips/API/current/VipsForeignSave.html#vips-jpegsave-buffer
 int set_jpeg_options(VipsOperation *operation, SaveParams *params)
 {
