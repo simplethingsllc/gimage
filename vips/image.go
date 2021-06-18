@@ -765,8 +765,9 @@ func (r *ImageRef) Insert(sub *ImageRef, x, y int, expand bool, background *Colo
 }
 
 // Mapim resamples an image using index to look up pixels
-func (r *ImageRef) Mapim(index *ImageRef) error {
-	out, err := vipsMapim(r.image, index.image)
+func (r *ImageRef) Mapim(index *ImageRef, interpolator Interpolator) error {
+	interpolate := vipsInterpolateNew(interpolator)
+	out, err := vipsMapim(r.image, index.image, interpolate)
 	if err != nil {
 		return err
 	}
